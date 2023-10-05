@@ -5,9 +5,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import ClickerGuiMethods.MouseOptions;
+import ClickerGuiMethods.MouseControler;
 
-import java.awt.AWTException;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,7 +23,8 @@ public class InitFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField delayInput;
 	
-	private MouseOptions mouseEventClicker;
+	private MouseControler mouseEventClicker;
+	private int delaySeted;
 
 
 	public InitFrame() {
@@ -69,6 +69,8 @@ public class InitFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mouseEventClicker.mouseClickOff();
+				CreateMouseEvent(delaySeted);
+				
 			}
 		});
 		stopButton.setBounds(245, 132, 130, 40);
@@ -103,12 +105,18 @@ public class InitFrame extends JFrame {
 		btnSetDelay.setBounds(299, 58, 58, 25);
 		contentPane.add(btnSetDelay);
 		
+		
+		this.delaySeted = Integer.parseInt(delayInput.getText());
+		CreateMouseEvent(delaySeted);
+		
+	}
+	
+	private void CreateMouseEvent(int Midelay) {
 		try {
-			this.mouseEventClicker = new MouseOptions(Integer.parseInt(delayInput.getText()));
-		} catch (NumberFormatException | AWTException e1) {
+			this.mouseEventClicker = new MouseControler(Midelay);
+		} catch (NumberFormatException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 	}
 }
