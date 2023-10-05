@@ -4,6 +4,10 @@ package ClickerGUI;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ClickerGuiMethods.MouseOptions;
+
+import java.awt.AWTException;
 import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -11,15 +15,22 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class InitFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField delayInput;
+	
+	private MouseOptions mouseEventClicker;
 
 
 	public InitFrame() {
+		
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		setResizable(false);
@@ -41,10 +52,25 @@ public class InitFrame extends JFrame {
 		contentPane.add(recordingButton);
 		
 		JButton startButton = new JButton("Start");
+		startButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if(mouseEventClicker.InUse() == false) {
+					mouseEventClicker.mouseClickOn();
+				}
+				
+			}
+		});
 		startButton.setBounds(50, 132, 130, 40);
 		contentPane.add(startButton);
 		
 		JButton stopButton = new JButton("Stop");
+		stopButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseEventClicker.mouseClickOff();
+			}
+		});
 		stopButton.setBounds(245, 132, 130, 40);
 		contentPane.add(stopButton);
 		
@@ -54,16 +80,35 @@ public class InitFrame extends JFrame {
 		lblNewLabel.setBounds(50, 50, 100, 40);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.RIGHT);
-		textField.setText("100");
-		textField.setBackground(UIManager.getColor("Button.background"));
-		textField.setBounds(130, 61, 50, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		delayInput = new JTextField();
+		delayInput.setHorizontalAlignment(SwingConstants.RIGHT);
+		delayInput.setText("1000");
+		delayInput.setBackground(UIManager.getColor("Button.background"));
+		delayInput.setBounds(130, 61, 50, 20);
+		contentPane.add(delayInput);
+		delayInput.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("milliseconds");
-		lblNewLabel_1.setBounds(190, 64, 80, 14);
+		lblNewLabel_1.setBounds(190, 64, 100, 14);
 		contentPane.add(lblNewLabel_1);
+		
+		JButton btnSetDelay = new JButton("Set");
+		btnSetDelay.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				mouseEventClicker.SetDelay(Integer.parseInt(delayInput.getText()));
+				
+			}
+		});
+		btnSetDelay.setBounds(299, 58, 58, 25);
+		contentPane.add(btnSetDelay);
+		
+		try {
+			this.mouseEventClicker = new MouseOptions(Integer.parseInt(delayInput.getText()));
+		} catch (NumberFormatException | AWTException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 	}
 }
