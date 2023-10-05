@@ -100,6 +100,7 @@ public class InitFrame extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				mouseEventClicker.SetDelay(Integer.parseInt(delayInput.getText()));
+				delaySeted = Integer.parseInt(delayInput.getText());
 				
 			}
 		});
@@ -107,7 +108,7 @@ public class InitFrame extends JFrame {
 		contentPane.add(btnSetDelay);
 		
 		
-		this.delaySeted = Integer.parseInt(delayInput.getText());
+		delaySeted = Integer.parseInt(delayInput.getText());
 		CreateMouseEvent(delaySeted);
 		
 	}

@@ -27,7 +27,6 @@ public class MouseControler extends SwingWorker<Object, Object>{
 	@Override
 	protected Object doInBackground() throws Exception {
 		while (mode) {
-        	System.out.println("funciona");
             mouse.mousePress(java.awt.event.InputEvent.BUTTON1_MASK);
             mouse.mouseRelease(java.awt.event.InputEvent.BUTTON1_MASK);
             Thread.sleep(delayClick); // Espera el tiempo configurado
@@ -50,7 +49,6 @@ public class MouseControler extends SwingWorker<Object, Object>{
     }
 
     public void mouseClickOff() {
-    	System.out.println("Off");
         mode = false;
     }
 
