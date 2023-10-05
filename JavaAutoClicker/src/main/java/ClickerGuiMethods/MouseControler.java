@@ -38,8 +38,6 @@ public class MouseControler extends SwingWorker<Object, Object>{
 	public void mouseClickOn() {
     	if(this.isDone() || !firtsExecution) {
     		mode = true;
-    		System.out.println(mode);
-            System.out.println("On");
             this.execute(); // Iniciar el SwingWorker
             
             if(!firtsExecution) {
@@ -57,7 +55,7 @@ public class MouseControler extends SwingWorker<Object, Object>{
     }
 
     public void SetDelay(int Miliseconds) {
-        mouse.setAutoDelay(Miliseconds);
+        delayClick = Miliseconds;
     }
     public boolean InUse() {
     	return mode;

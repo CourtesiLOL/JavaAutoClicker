@@ -35,6 +35,7 @@ public class InitFrame extends JFrame {
 		setBounds(100, 100, 450, 300);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setAlwaysOnTop(true);
 		
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
